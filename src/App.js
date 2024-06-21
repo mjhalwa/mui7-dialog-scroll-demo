@@ -7,8 +7,10 @@ import {
   DialogTitle,
   DialogContent,
   Typography,
+  Checkbox,
   TextField,
   Card,
+  FormControlLabel,
   CardHeader,
   CardContent,
   Collapse,
@@ -24,6 +26,7 @@ function getArray(size) {
 function App() {
   const [openCollapse, setOpenCollapse] = useState(true)
   const [dynamicContent, setDynamicContent] = useState(getArray(LONG_SIZE))
+  const [applyFix, setApplyFix] = useState(true);
 
   return (
     <div className="App">
@@ -35,18 +38,45 @@ function App() {
             maxHeight: "90vh",
           },
         }}>
-        <DialogTitle>
+        <DialogTitle
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+          }}>
           Dialog Title
+          <FormControlLabel
+            sx={{
+              flexDirection: "row-reverse", // checkbox label on the left
+            }}
+            control={
+              <Checkbox checked={applyFix} onChange={(e) => setApplyFix(e.target.checked)}/>
+            }
+            
+            label={"apply fix"}
+            />
         </DialogTitle>
         <DialogContent
-          sx={{
-
-          }}>
+          sx={
+            applyFix ? {
+              display: 'flex',
+              flexDirection: 'column',
+            }
+            :
+            {}
+          }>
           <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column"
-            }}>
+            sx={
+              {
+                display: "flex",
+                flexDirection: "column",  
+                ...(
+                  applyFix ? {
+                    overflow: "auto", // Ensure scrollbar first on card, then here
+                  }
+                  :
+                  {}
+                )
+              }}>
             <Typography>
               Example dialog to demonstrate a challenge with the scrollbar in MUI 7 (v5.15.20).
               The dialog should have a maximum height of 90vh.
@@ -64,9 +94,15 @@ function App() {
             </Box>
             <Collapse
               in={openCollapse}
-              sx={{
-
-              }}>
+              sx={
+                applyFix ? {
+                  display: "flex",
+                  flexDirection: "column",
+                  overflow: "auto",
+                }
+                :
+                {}
+              }>
               <Card
                 sx={{
 
@@ -88,7 +124,6 @@ function App() {
               <Button onClick={() => setDynamicContent(dynamicContent.length > 1 ? getArray(1) : getArray(LONG_SIZE))}>toggle list length</Button>
             </Box>
           </Box>
- 
         </DialogContent>
       </Dialog>
     </div>

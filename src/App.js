@@ -98,19 +98,29 @@ function App() {
                 applyFix ? {
                   display: "flex",
                   flexDirection: "column",
-                  overflow: "auto",
+                  "& .MuiCollapse-wrapper": {
+                    overflow: "hidden", // required to pass on the scroll to child
+                  },
+                  "& .MuiCollapse-wrapperInner": {
+                    display: "flex",
+                    flexDirection: "column",
+                  }
                 }
                 :
                 {}
               }>
               <Card
-                sx={{
-
-                }}>
+                sx={
+                  applyFix ? {
+                    display: "flex",
+                    flexDirection: "column",
+                  }
+                  :
+                  {}
+                }>
                 <CardHeader title={"Card Title (scrollbar should be below this)"}></CardHeader>
                 <CardContent
                   sx={{
-                    maxHeight: "100%",
                     overflowY: "auto",
                   }}>
                   {

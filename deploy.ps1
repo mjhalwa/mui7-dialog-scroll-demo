@@ -31,9 +31,9 @@ else {
   # -> Note: -and is not a correct replacement for && operator
   # -> thus replacement of && with condition on $? to check previous command succeeded
   Write-Host "adding build to git and GitHub..." -ForegroundColor "DarkCyan"
-  git add ./build; if ($?) { git commit -m "update with current build"; if ($?) { git push } }
+  git add -f ./build; if ($?) { git commit -m "update with current build"; if ($?) { git push } }
 
   # override gh-pages branch with build directory content
   Write-Host "push build directory content to gh-pages branch on GitHub..." -ForegroundColor "DarkCyan"
-  git subtree push --prefix ./build origin gh-pages
+  git subtree push --prefix build origin gh-pages
 }

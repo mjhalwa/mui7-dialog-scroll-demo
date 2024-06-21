@@ -31,7 +31,9 @@ function App() {
         maxWidth={"md"}
         open={true}
         PaperProps={{
-          // maxHeight: "90vh",
+          sx: {
+            maxHeight: "90vh",
+          },
         }}>
         <DialogTitle>
           Dialog Title

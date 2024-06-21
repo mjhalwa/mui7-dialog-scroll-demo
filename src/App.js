@@ -18,7 +18,6 @@ import {
 } from '@mui/material';
 
 const LONG_SIZE = 30;
-const MIN_OPENED_COLLAPSE_HEIGHT = "100px";
 
 function getArray(size) {
   return Array.apply(null, Array(size)).map(() => "hello")
@@ -72,7 +71,7 @@ function App() {
                 flexDirection: "column",  
                 ...(
                   applyFix ? {
-                    overflow: "auto", // Ensure scrollbar first on card, then here
+                    overflowY: "auto", // Ensure scrollbar first on card, then here
                   }
                   :
                   {}
@@ -98,7 +97,7 @@ function App() {
               collapsedSize={
                 applyFix ?
                   // else collapse would shrink to zero before dialog content scroll starts
-                  openCollapse ? MIN_OPENED_COLLAPSE_HEIGHT : "0px"
+                  openCollapse ? "128px" : "0px"
                 :
                 "0px"
               }
@@ -107,7 +106,7 @@ function App() {
                   display: "flex",
                   flexDirection: "column",
                   "& .MuiCollapse-wrapper": {
-                    overflow: "hidden", // required to pass on the scroll to child
+                    overflowY: "hidden", // required to pass on the scroll to child
                   },
                   "& .MuiCollapse-wrapperInner": {
                     display: "flex",

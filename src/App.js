@@ -18,6 +18,7 @@ import {
 } from '@mui/material';
 
 const LONG_SIZE = 30;
+const MIN_OPENED_COLLAPSE_HEIGHT = "100px";
 
 function getArray(size) {
   return Array.apply(null, Array(size)).map(() => "hello")
@@ -94,6 +95,13 @@ function App() {
             </Box>
             <Collapse
               in={openCollapse}
+              collapsedSize={
+                applyFix ?
+                  // else collapse would shrink to zero before dialog content scroll starts
+                  openCollapse ? MIN_OPENED_COLLAPSE_HEIGHT : "0px"
+                :
+                "0px"
+              }
               sx={
                 applyFix ? {
                   display: "flex",
